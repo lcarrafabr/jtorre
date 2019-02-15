@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Relatório de acompanhamento" language="groovy" pageWidth="842" pageHeight="1190" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="AT_REALIZADO" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[$F{CODIGO_REGIONAL}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="AT_NAO_REALIZADO" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[$P{AT_NAO_REALIZADO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NOME_CREDENCIADO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{NOME_CREDENCIADO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CODIGO_REGIONAL" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{CODIGO_REGIONAL}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CODIGO_LISTA_RELATORIO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{CODIGO_LISTA_RELATORIO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CODIGO_PESSOA_CAMPO_CREDENCIADO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{CODIGO_PESSOA_CAMPO_CREDENCIADO}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\lcbenfic\\Documents\\NetBeansProjects\\jTorre\\jTorre\\src\\Relatorios\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.lang.Object">
+		<defaultValueExpression><![CDATA[$P{LOGO}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT CD.*
+FROM CONTROLES_DIARIOS CD, REGIONAIS R, LISTAS_RELATORIOS L
+WHERE CD.CODIGO_CONTROLE_DIARIO = CD.CODIGO_CONTROLE_DIARIO
+AND L.CODIGO_LISTA_RELATORIO = CD.CODIGO_LISTA_RELATORIO
+AND R.CODIGO_REGIONAL = CD.CODIGO_REGIONAL
+AND CD.CODIGO_REGIONAL = $P{CODIGO_REGIONAL}
+AND CD.CODIGO_LISTA_RELATORIO = $P{CODIGO_LISTA_RELATORIO}
+AND CD.CODIGO_PESSOA_CAMPO_CREDENCIADO = $P{CODIGO_PESSOA_CAMPO_CREDENCIADO}]]>
+	</queryString>
+	<field name="CODIGO_CONTROLE_DIARIO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CODIGO_PESSOA_CAMPO_CREDENCIADO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CODIGO_REGIONAL" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CODIGO_LISTA_RELATORIO" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CANCELADAS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DEVOLVIDAS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="EXECUTADAS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FINALIZADAS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="VENCIDAS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="REAGENDADAS" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATA" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="DEVOLVIDAS_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{DEVOLVIDAS}]]></variableExpression>
+	</variable>
+	<variable name="CANCELADAS_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CANCELADAS}]]></variableExpression>
+	</variable>
+	<variable name="CANCELADAS_2" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{CANCELADAS}]]></variableExpression>
+	</variable>
+	<variable name="DEVOLVIDAS_2" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{DEVOLVIDAS}]]></variableExpression>
+	</variable>
+	<variable name="EXECUTADAS_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{EXECUTADAS}]]></variableExpression>
+	</variable>
+	<variable name="FINALIZADAS_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{FINALIZADAS}]]></variableExpression>
+	</variable>
+	<variable name="VENCIDAS_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{VENCIDAS}]]></variableExpression>
+	</variable>
+	<variable name="REAGENDADAS_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{REAGENDADAS}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="65" width="842" height="20" forecolor="#FFFFFF" backcolor="#963634"/>
+			</rectangle>
+			<image>
+				<reportElement x="0" y="27" width="246" height="38"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="702" y="45" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="602" y="45" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Criado em:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="333" y="45" width="174" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{NOME_CREDENCIADO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="1" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="1" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="1" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="1" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="870" splitType="Stretch">
+			<lineChart>
+				<chart isShowLegend="true">
+					<reportElement x="-4" y="0" width="403" height="168"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Volume de O.S's canceladas"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["CANCELADAS"]]></seriesExpression>
+						<categoryExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATA})]]></categoryExpression>
+						<valueExpression><![CDATA[$F{CANCELADAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#963634"/>
+					</plot>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart>
+					<reportElement x="399" y="0" width="403" height="168"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Volume de O.S's devolvidas"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Devolvidas"]]></seriesExpression>
+						<categoryExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATA})]]></categoryExpression>
+						<valueExpression><![CDATA[$F{DEVOLVIDAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#983634"/>
+					</plot>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart>
+					<reportElement mode="Transparent" x="-4" y="175" width="403" height="168"/>
+					<chartTitle position="Top">
+						<titleExpression><![CDATA["Volume de O.S's finalizadas"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["O.S's Finalizadas"]]></seriesExpression>
+						<categoryExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATA})]]></categoryExpression>
+						<valueExpression><![CDATA[$F{FINALIZADAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#983634"/>
+					</plot>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart>
+					<reportElement x="399" y="175" width="403" height="168"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Volume de O.S's vencidas"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["O.S's vencidas"]]></seriesExpression>
+						<categoryExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATA})]]></categoryExpression>
+						<valueExpression><![CDATA[$F{VENCIDAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#983634"/>
+					</plot>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<bar3DChart>
+				<chart>
+					<reportElement x="-4" y="350" width="403" height="168"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["AT realizado"]]></seriesExpression>
+						<categoryExpression><![CDATA[$P{AT_REALIZADO}+"%"]]></categoryExpression>
+						<valueExpression><![CDATA[$P{AT_REALIZADO}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["AT não realizado"]]></seriesExpression>
+						<categoryExpression><![CDATA[$P{AT_NAO_REALIZADO}+"%"]]></categoryExpression>
+						<valueExpression><![CDATA[$P{AT_NAO_REALIZADO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<lineChart>
+				<chart>
+					<reportElement x="399" y="350" width="403" height="168"/>
+					<chartTitle>
+						<titleExpression><![CDATA["Volume de O.S's reagendadas"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Reagendadas"]]></seriesExpression>
+						<categoryExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{DATA})]]></categoryExpression>
+						<valueExpression><![CDATA[$F{REAGENDADAS}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#983634"/>
+					</plot>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<subreport>
+				<reportElement x="-20" y="518" width="842" height="60"/>
+				<subreportParameter name="CODIGO_LISTA_RELATORIO">
+					<subreportParameterExpression><![CDATA[$P{CODIGO_LISTA_RELATORIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CODIGO_PESSOA_CAMPO_CREDENCIADO">
+					<subreportParameterExpression><![CDATA[$P{CODIGO_PESSOA_CAMPO_CREDENCIADO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="CODIGO_REGIONAL">
+					<subreportParameterExpression><![CDATA[$P{CODIGO_REGIONAL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "AderenciaAosProcedimentos_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="15" y="693" width="295" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Informações Gerais]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="15" y="717" width="295" height="145"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="25" y="731" width="167" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de O.S's canceladas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="751" width="167" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de O.S's devolvidas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="771" width="167" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de O.S's executadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="791" width="167" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de O.S's finalizadas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="811" width="167" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de O.S's vencidas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="831" width="167" height="20"/>
+				<textElement/>
+				<text><![CDATA[Total de O.S's reagendadas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="192" y="731" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{CANCELADAS_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="751" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{DEVOLVIDAS_2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="771" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{EXECUTADAS_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="791" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{FINALIZADAS_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="811" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{VENCIDAS_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="192" y="831" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REAGENDADAS_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
